@@ -7,4 +7,8 @@ export class CowinCustomizedPluginWeb extends WebPlugin implements CowinCustomiz
     console.log('ECHO', options);
     return options;
   }
+
+  async getPermission(): Promise<{ value: string }> {
+    return { value: "This not developed for web" };
+  }
 }
