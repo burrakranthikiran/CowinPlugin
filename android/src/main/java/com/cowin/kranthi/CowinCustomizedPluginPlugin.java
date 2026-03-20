@@ -18,9 +18,11 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @CapacitorPlugin(name = "CowinCustomizedPlugin")
 public class CowinCustomizedPluginPlugin extends Plugin {
@@ -98,6 +100,31 @@ public class CowinCustomizedPluginPlugin extends Plugin {
             call.resolve(ret);
         } else {
             call.reject("MAC ID is null");
+        }
+    }
+
+    @PluginMethod
+    public void listDevices(PluginCall call) {
+        try {
+            List<Map<String, String>> devices = bluetoothManager.listDevices();
+            JSONArray devicesArray = new JSONArray();
+
+            for (Map<String, String> device : devices) {
+                JSONObject deviceObj = new JSONObject();
+                deviceObj.put("deviceId",   device.get("deviceId"));
+                deviceObj.put("deviceName", device.get("deviceName"));
+                deviceObj.put("deviceType", device.get("deviceType"));
+                deviceObj.put("bondState",  device.get("bondState"));
+                devicesArray.put(deviceObj);
+            }
+
+            JSObject ret = new JSObject();
+            ret.put("devices", devicesArray);
+            Log.d("BluetoothPlugin", "listDevices: found " + devices.size() + " device(s)");
+            call.resolve(ret);
+        } catch (Exception e) {
+            Log.e("BluetoothPlugin", "Error in listDevices: " + e.getMessage(), e);
+            call.reject("Failed to list devices: " + e.getMessage());
         }
     }
 

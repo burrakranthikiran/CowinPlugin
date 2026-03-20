@@ -1,0 +1,178 @@
+{
+  "api": {
+    "name": "CowinCustomizedPluginPlugin",
+    "slug": "cowincustomizedpluginplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "echo",
+        "signature": "(options: { value: string; }) => Promise<{ value: string; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ value: string; }"
+          }
+        ],
+        "returns": "Promise<{ value: string; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "echo"
+      },
+      {
+        "name": "getPermission",
+        "signature": "() => Promise<{ value: string; }>",
+        "parameters": [],
+        "returns": "Promise<{ value: string; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "getpermission"
+      },
+      {
+        "name": "listDevices",
+        "signature": "() => Promise<{ devices: BluetoothDeviceInfo[]; }>",
+        "parameters": [],
+        "returns": "Promise<{ devices: BluetoothDeviceInfo[]; }>",
+        "tags": [],
+        "docs": "List available Bluetooth devices.\n- Android: returns all paired/bonded classic + BLE devices from the system.\n- Web: returns devices previously granted permission via the browser picker\n       (requires `navigator.bluetooth.getDevices()` — Chrome 85+ / Edge 85+).\n       Falls back to opening the browser picker if no permitted devices exist.",
+        "complexTypes": [
+          "BluetoothDeviceInfo"
+        ],
+        "slug": "listdevices"
+      },
+      {
+        "name": "connectToDevice",
+        "signature": "(options: { value: string; }) => Promise<{ value: boolean; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ value: string; }"
+          }
+        ],
+        "returns": "Promise<{ value: boolean; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "connecttodevice"
+      },
+      {
+        "name": "sendCommand",
+        "signature": "(options: { value: string; }) => Promise<{ value: boolean; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ value: string; }"
+          }
+        ],
+        "returns": "Promise<{ value: boolean; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "sendcommand"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: string, listenerFunc: (data: any) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "string"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(data: any) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistenerstring-"
+      },
+      {
+        "name": "removeAllListeners",
+        "signature": "(eventName: string) => Promise<void>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "string"
+          }
+        ],
+        "returns": "Promise<void>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "removealllisteners"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "BluetoothDeviceInfo",
+      "slug": "bluetoothdeviceinfo",
+      "docs": "Represents a single Bluetooth device returned by listDevices()",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "deviceId",
+          "tags": [],
+          "docs": "Unique device identifier (MAC address on Android, browser-assigned opaque ID on Web)",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "deviceName",
+          "tags": [],
+          "docs": "Human-readable device name, or null if unavailable",
+          "complexTypes": [],
+          "type": "string | null"
+        },
+        {
+          "name": "deviceType",
+          "tags": [],
+          "docs": "Device type (Android only).\n0 = Unknown, 1 = Classic, 2 = BLE, 3 = Dual\nOn web this will always be \"ble\" | \"unknown\".",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "bondState",
+          "tags": [],
+          "docs": "Bonding state (Android only: \"bonded\" | \"bonding\" | \"none\").\nOn web this will always be \"unknown\".",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [],
+  "pluginConfigs": []
+}
